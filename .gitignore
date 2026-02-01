@@ -1,0 +1,19 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+
+# Environments
+venv/
+.env
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Temp files
+temp_frame.jpg
+
+# Models (uncomment to ignore)
+# models/

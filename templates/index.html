@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smart Exam Proctor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <h1 class="title">Smart Exam Proctor</h1>
+    <p class="subtitle">***AI-Powered Exam Protecting and  Monitoring System***</p>
+  </header>
+
+  <main class="main">
+    <div class="video-card">
+      <div class="video-frame">
+        <img src="{{ url_for('video_feed') }}" alt="Live exam feed" id="video-stream">
+      </div>
+
+      <div class="controls">
+        <button id="start-btn" class="btn">Start Exam</button>
+        <button id="stop-btn" class="btn secondary">Stop</button>
+      </div>
+
+      <div class="notes">
+        <span class="note">Status: <strong id="status-text">Waiting</strong></span>
+        <span class="note">Tip: Close other apps for smoother performance</span>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <small>AI-Powered Smart Exam Protecting & Monitoring System</small>
+  </footer>
+
+  <script>
+    // small UI behaviour (optional)
+    const start = document.getElementById('start-btn');
+    const stop = document.getElementById('stop-btn');
+    const status = document.getElementById('status-text');
+    const video = document.getElementById('video-stream');
+
+    start?.addEventListener('click', () => {
+      fetch('/start_exam', { method: 'POST' })
+        .then(r => r.json())
+        .then(j => {
+          status.textContent = j.status || 'Exam Started';
+          // reload the video stream to establish a new streaming response
+          video.src = '/video_feed?t=' + Date.now();
+        })
+        .catch(() => status.textContent = 'Error');
+    });
+
+    stop?.addEventListener('click', () => {
+      fetch('/stop_exam', { method: 'POST' })
+        .then(r => r.json())
+        .then(j => {
+          status.textContent = j.status || 'Stopped';
+          // stop the client-side image by clearing the src
+          video.removeAttribute('src');
+          video.src = '';
+        })
+        .catch(() => {
+          status.textContent = 'Error stopping';
+        });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+:root{
+  --bg: #f6f8fb;
+  --card: #ffffff;
+  --accent: #1572e8;
+  --muted: #6b7280;
+  --success: #16a34a;
+  --danger: #ef4444;
+  --radius: 12px;
+  --max-width: 900px;
+}
+
+/* Reset-ish */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  background: linear-gradient(180deg,#eef2ff 0%,var(--bg) 100%);
+  color:#111827;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding:32px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* Header */
+.site-header{ text-align:center; margin-bottom:18px; }
+.title{
+  font-size:1.6rem;
+  color:var(--accent);
+  letter-spacing:0.2px;
+}
+.subtitle{
+  color:var(--muted);
+  font-size:0.95rem;
+  margin-top:6px;
+}
+
+/* Main card */
+.main{ width:100%; display:flex; justify-content:center; }
+.video-card{
+  width:100%;
+  max-width:var(--max-width);
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:0 8px 24px rgba(16,24,40,0.08);
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+/* Video frame */
+.video-frame{
+  background:#000;
+  border-radius:10px;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+#video-stream{
+  width:100%;
+  height:auto;
+  display:block;
+  max-height:70vh;
+  object-fit:cover;
+}
+
+/* Controls */
+.controls{ display:flex; gap:10px; align-items:center; }
+.btn{
+  background:var(--accent);
+  color:white;
+  border:none;
+  padding:10px 16px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+.btn:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(21,114,232,0.12) }
+.btn.secondary{
+  background:transparent;
+  color:var(--accent);
+  border:1px solid rgba(21,114,232,0.12);
+  font-weight:600;
+}
+
+/* Notes / status */
+.notes{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:center;
+  justify-content:flex-start;
+}
+.note{
+  color:var(--muted);
+  font-size:0.95rem;
+  background:#f8fafc;
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid rgba(15,23,42,0.03);
+}
+
+/* Footer */
+.site-footer{
+  margin-top:18px;
+  color:var(--muted);
+  font-size:0.85rem;
+  text-align:center;
+}
+
+/* Responsive */
+@media (max-width:720px){
+  .title{ font-size:1.25rem }
+  .video-card{ padding:12px }
+  .btn{ padding:8px 12px; font-size:0.95rem }
+}
